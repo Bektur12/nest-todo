@@ -30,19 +30,12 @@ export class TodoService {
     return todo.save();
   }
 
-  update(
-    id: string,
-    changeTodo: ChangeTodo,
-  ): Promise<[affectedCount: number, affectedRows: Todo[]]> {
-    return this.todoModel.update(
-      { ...changeTodo },
-      {
-        where: {
-          id,
-        },
-        returning: true,
-      },
-    );
+  async update(id: string, changeTodo: ChangeTodo): Promise<Todo> {
+    const todo = await this.todoModel.findOne({ where: { id } });
+    todo.updatedAt = new Date();
+    todo.title = changeTodo.title;
+    todo.done = changeTodo.done;
+    return todo.save();
   }
 
   async remove(id: string): Promise<void> {

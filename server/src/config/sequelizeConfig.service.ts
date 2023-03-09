@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common/decorators';
 import { ConfigService } from '@nestjs/config';
 import {
   SequelizeOptionsFactory,
@@ -6,6 +7,7 @@ import {
 import { Todo } from 'src/todos/models/todo.model';
 import { EnumConfig } from './enumConfig/enumConfig';
 
+@Injectable()
 export class SequelizeConfigService implements SequelizeOptionsFactory {
   constructor(private readonly configService: ConfigService) {}
   createSequelizeOptions(): SequelizeModuleOptions {
