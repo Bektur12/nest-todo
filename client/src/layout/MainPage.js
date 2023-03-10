@@ -7,6 +7,7 @@ import { TodoItem } from "../components/forms/TodoItem";
 
 export const MainPage = () => {
   const { todos } = useSelector((state) => state.todo);
+  console.log(todos, "todos");
 
   return (
     <>
@@ -16,7 +17,7 @@ export const MainPage = () => {
         <Form />
         <h2>Новые дела</h2>
         {todos.map((item) => (
-          <TodoItem description={item.title} id={item.id} />
+          <TodoItem description={item.title} id={item.id} done={item.done} />
         ))}
       </MainContainer>
     </>

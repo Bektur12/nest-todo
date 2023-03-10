@@ -31,6 +31,21 @@ export const patchTodo = createAsyncThunk(
     }
   }
 );
+export const completedTodo = createAsyncThunk(
+  "todo/completed",
+  async (data, { dispatch }) => {
+    console.log(data, "datat");
+    try {
+      await patch(`/todos/${data.id}`, {
+        done: Boolean(data.done),
+        title: data.title,
+      });
+      return dispatch(getTodo());
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+);
 export const deleteTodo = createAsyncThunk(
   "todo/delete",
   async (id, { dispatch }) => {

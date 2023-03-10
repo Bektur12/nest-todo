@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { deleteTodo, patchTodo } from "../../store/todoActions";
+import { completedTodo, deleteTodo, patchTodo } from "../../store/todoActions";
 import { Button } from "../UI/Button";
 
-export const TodoItem = ({ description, id }) => {
+export const TodoItem = ({ description, id, done }) => {
   const [todoId, setTodoID] = useState(null);
 
   const [changeValue, setChangeValue] = useState("");
@@ -22,6 +22,9 @@ export const TodoItem = ({ description, id }) => {
     dispatch(patchTodo({ id, title: changeValue }));
     setTodoID(null);
   };
+  const completedTodoItem = () => {
+    dispatch(completedTodo({ id, done: !done, title: description }));
+  };
   return (
     <TodoItemContainer>
       {todoId === id ? (
@@ -36,12 +39,16 @@ export const TodoItem = ({ description, id }) => {
         </ChangeInputContainer>
       ) : (
         <>
-          <h1>{description}</h1>
+          <h1 style={{ textDecoration: done ? "line-through" : "" }}>
+            {description}
+          </h1>
           <div className="content">
             <Button bgColor="#0071F6" onClick={() => openInputChangeValue(id)}>
               Изменить
             </Button>
-            <Button bgColor="#1EEC33">Завершить</Button>
+            <Button bgColor="#1EEC33" onClick={completedTodoItem}>
+              Завершить
+            </Button>
             <Button bgColor="#FF6B6B" onClick={deleteItem}>
               Удалить
             </Button>
