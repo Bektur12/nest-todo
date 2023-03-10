@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-export const Button = ({ children, bgColor }) => {
-  return <ButtonForm bgColor={bgColor}>{children}</ButtonForm>;
+export const Button = ({ children, bgColor, onClick }) => {
+  return (
+    <ButtonForm bgColor={bgColor} onClick={onClick}>
+      {children}
+    </ButtonForm>
+  );
 };
 
 const ButtonForm = styled("button")`

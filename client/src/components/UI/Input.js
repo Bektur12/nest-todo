@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 export const Input = ({ value, onChange }) => {
-  return <InputStyled value={value} onChange={onChange} />;
+  return (
+    <InputStyled value={value} onChange={(e) => onChange(e.target.value)} />
+  );
 };
 
 const InputStyled = styled("input")`
   width: 70%;
-  height: 5vh;
+  height: 57px;
   background: #ffffff;
   mix-blend-mode: normal;
   border: 2px solid #8a72ea;

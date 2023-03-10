@@ -1,10 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Form } from "../components/forms/Form";
-import { Input } from "../components/UI/Input";
 import { Header } from "./Header";
+import { TodoItem } from "../components/forms/TodoItem";
 
 export const MainPage = () => {
+  const { todos } = useSelector((state) => state.todo);
+
   return (
     <>
       <Header />
@@ -12,6 +15,9 @@ export const MainPage = () => {
         <h1>Введите название дела</h1>
         <Form />
         <h2>Новые дела</h2>
+        {todos.map((item) => (
+          <TodoItem description={item.title} id={item.id} />
+        ))}
       </MainContainer>
     </>
   );
